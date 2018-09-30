@@ -1,4 +1,5 @@
 galaxy_info:
+  role_name: splunk_license_master
   author: Andrew Mackett
   description: Configure a Splunk Enterprise license master.
 
