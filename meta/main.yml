@@ -1,0 +1,22 @@
+galaxy_info:
+  author: Andrew Mackett
+  description: Configure a Splunk Enterprise license master.
+
+  license: MIT
+
+  min_ansible_version: 2.3
+
+  platforms:
+  - name: Ubuntu
+    versions:
+      - all
+
+  galaxy_tags:
+    - splunk
+    - splunkenterprise
+    - splunklicense
+    - logs
+    - search
+
+  dependencies:
+    - andrewmackett.splunk_common

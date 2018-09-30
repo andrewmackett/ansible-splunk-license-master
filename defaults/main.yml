@@ -1,0 +1,5 @@
+---
+splunk_license_folder: /opt/splunk/etc/licenses/enterprise/
+splunk_os_user: splunk
+splunk_os_group: splunk
+splunk_license_type: Enterprise  # Enterprise | Trial | Forwarder | Free

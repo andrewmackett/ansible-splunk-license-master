@@ -1,0 +1,45 @@
+---
+- name: create license folder
+  file: path={{ splunk_license_folder }} owner={{ splunk_os_user }} group={{ splunk_os_group }} mode=700 state=directory
+
+- name: copy license file to license folder
+  copy: content="{{ splunk_primary_license_file }}" dest="{{ splunk_license_folder }}/splunk.lic" owner={{ splunk_os_user }} group={{ splunk_os_group }} mode=600
+  notify: restart splunk
+
+- name: copy alternative license file to license folder
+  copy: content="{{ splunk_alternative_license_file }}" dest="{{ splunk_license_folder }}/alternative.lic" owner={{ splunk_os_user }} group={{ splunk_os_group }} mode=600
+  notify: restart splunk
+  when: splunk_alternative_license_file is defined
+
+- name: remove alternative license file if it's not needed
+  file: path="{{ splunk_license_folder }}/alternative.lic" state=absent
+  notify: restart splunk
+  when: splunk_alternative_license_file is not defined
+
+- name: checking if server.conf exists
+  stat: path=/opt/splunk/etc/system/local/server.conf
+  register: server_conf_path
+
+- name: touch to ensure server.conf exists
+  file:
+    path: /opt/splunk/etc/system/local/server.conf
+    state: touch
+  become: yes
+  become_user: splunk
+  when: server_conf_path.stat.exists == False
+
+- name: set master_uri to self
+  ini_file:
+    path: /opt/splunk/etc/system/local/server.conf
+    state: present
+    section: license
+    option: master_uri
+    value: self
+
+- name: set active_group to Enterprise
+  ini_file:
+    path: /opt/splunk/etc/system/local/server.conf
+    state: present
+    section: license
+    option: active_group
+    value: "{{ splunk_license_type }}"
