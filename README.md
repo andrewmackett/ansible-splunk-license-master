@@ -1,6 +1,8 @@
 splunk-license-master
 =========
 
+[![Build Status](https://travis-ci.org/andrewmackett/ansible-splunk-license-master.svg?branch=master)](https://travis-ci.org/andrewmackett/ansible-splunk-license-master)
+
 Configures an existing Splunk Enterprise installation into a license master.
 
 Requirements
