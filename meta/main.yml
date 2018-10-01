@@ -5,12 +5,14 @@ galaxy_info:
 
   license: MIT
 
-  min_ansible_version: 2.3
+  min_ansible_version: 2.4
 
   platforms:
   - name: Ubuntu
     versions:
-      - all
+      - trusty
+      - xenial
+      - bionic
 
   galaxy_tags:
     - splunk
@@ -19,5 +21,5 @@ galaxy_info:
     - logs
     - search
 
-  dependencies:
-    - andrewmackett.splunk_common
+dependencies:
+  - andrewmackett.splunk_common
